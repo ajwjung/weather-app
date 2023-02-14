@@ -9,9 +9,24 @@
     <title>Weather App</title>
 </head>
 <body>
-    <form>
-        <input type="text" id="user-input" name="location" placeholder="Search a city" required>
-        <button type="submit">Search</button>
-    </form>
+    <div class="content">
+        <div class="form-container">
+            <form>
+                <input type="text" id="user-input" name="location" placeholder="Search a city" required>
+                <button type="submit">Search</button>
+            </form>
+        </div>
+        <div class="weather-container">
+            <h1 id="city">San Francisco</h1>
+            <div class="general-container">
+                <img src="#" id="weather-icon">
+                <div class="temp-container">
+                    <p id="current-temp">65* F</p>
+                    <p id="feels-like">Feels like 60* F</p>
+                </div>
+            </div>
+            <p id="generic-report">Mostly cloudy</p>
+        </div>
+    </div>
 </body>
 </html>
