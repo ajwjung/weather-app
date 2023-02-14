@@ -1,24 +1,27 @@
+import WeatherData from "./fetch-data.js";
+
 const UserInput = (() => {
     const searchForm = document.querySelector("form");
     let location;
 
-    const updateLocation = (text) => {
+    const saveLocation = (text) => {
         location = text;
     };
 
     const getLocation = () => location;
     
-    const saveLocation = () => {
+    const getData = () => {
         const input = document.getElementById("user-input");
 
         searchForm.addEventListener("submit", async (e) => {
             e.preventDefault();
-            updateLocation(input.value);
-            console.log(input.value);
+            saveLocation(input.value);
+            console.log(getLocation());
+            console.log(await WeatherData.getWeatherData(getLocation()));
         });
     };
     
-    return { saveLocation, getLocation };
+    return { getData };
 })();
 
 export default UserInput;
