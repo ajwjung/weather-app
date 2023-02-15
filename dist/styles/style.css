@@ -63,7 +63,8 @@ p {
     filter: var(--svg-filter);
 }
 
-#current-temp {
+#current-temp,
+#current-deg {
     font-size: 4rem;
 }
 
