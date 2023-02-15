@@ -1,4 +1,5 @@
 import WeatherData from "./fetch-data.js";
+import Display from "./display-weather.js";
 
 const UserInput = (() => {
     const searchForm = document.querySelector("form");
@@ -16,7 +17,8 @@ const UserInput = (() => {
         searchForm.addEventListener("submit", async (e) => {
             e.preventDefault();
             saveLocation(input.value);
-            await WeatherData.getWeatherData(readLocation());
+            const data = await WeatherData.getWeatherData(readLocation());
+            Display.displayWeather(data);
         });
     };
     
