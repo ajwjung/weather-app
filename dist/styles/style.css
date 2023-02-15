@@ -20,14 +20,19 @@ p {
 
 .content,
 .weather-container,
-.general-container {
+.general-container,
+.other-info-container,
+.info,
+.toggle-container {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .content,
-.weather-container {
+.weather-container,
+.info,
+.toggle-container {
     flex-direction: column;
 }
 
@@ -48,9 +53,17 @@ p {
     gap: var(--small-gap);
 }
 
+#generic-report {
+    font-size: 1.5rem;
+}
+
 #weather-icon,
 .temp-container {
     height: 100%;
+}
+
+#weather-icon {
+    filter: var(--svg-filter);
 }
 
 .temp-container {
@@ -59,15 +72,35 @@ p {
     justify-content: center;
 }
 
-#weather-icon {
-    filter: var(--svg-filter);
-}
-
 #current-temp,
 #current-deg {
     font-size: 4rem;
 }
 
-#generic-report {
-    font-size: 1.5rem;
+.other-info-container {
+    width: 40%;
+    justify-content: space-evenly;
+    gap: var(--large-gap);
+}
+
+.info {
+    align-items: flex-start;
+}
+
+#units-btn {
+    height: 30px;
+    width: 50px;
+    background: rgb(255, 255, 255, 0.8);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#units-btn:hover {
+    background: rgb(255, 255, 255, 0.6);
+}
+
+#units-btn:active {
+    background: rgb(255, 255, 255, 0.6);
+    transform: translateY(2px)
 }
