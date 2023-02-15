@@ -5,7 +5,10 @@ const Display = (() => {
     const feelsLike = document.getElementById("feels-like");
     const genericReport = document.getElementById("generic-report");
     const humidityLevel = document.getElementById("humidity");
-    const wind = document.getElementById("wind");
+    const wind = document.getElementById("wind-speed");
+    const currentDeg = document.getElementById("current-deg");
+    const feelsLikeDeg = document.getElementById("feels-like-deg");
+    const windSpeed = document.getElementById("wind-unit");
 
     const capitalizeFirstLetter = (string) => {
         const firstLetter = string.charAt(0).toUpperCase();
@@ -42,14 +45,27 @@ const Display = (() => {
         }
     };
 
+    const setUnits = (units) => {
+        if (units === "metric") {
+            currentDeg.textContent = " C";
+            feelsLikeDeg.textContent = " C";
+            windSpeed.textContent = " km/h";
+        } else if (units === "imperial") {
+            currentDeg.textContent = " F";
+            feelsLikeDeg.textContent = " F";
+            windSpeed.textContent = " mph";
+        }
+    };
+
     const displayWeather = (data) => {
         cityName.textContent = `${data.name}, ${data.sys.country}`;
         currentTemp.textContent = `${Math.floor(data.main.temp)}\u00B0`;
-        feelsLike.textContent = `Feels like ${Math.floor(data.main.feels_like)}\u00B0`;
+        feelsLike.textContent = `${Math.floor(data.main.feels_like)}\u00B0`;
         genericReport.textContent = capitalizeFirstLetter(data.weather[0].description);
         setWeatherIcon(data.weather[0].description);
-        humidityLevel.textContent = `Humidity level: ${data.main.humidity}%`;
-        wind.textContent = `${data.wind.speed} mph`;
+        humidityLevel.textContent = data.main.humidity;
+        wind.textContent = data.wind.speed;
+        setUnits("imperial"); // default
     };
 
     return { displayWeather };
