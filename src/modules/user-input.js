@@ -8,20 +8,19 @@ const UserInput = (() => {
         location = text;
     };
 
-    const getLocation = () => location;
-    
+    const readLocation = () => location;
+
     const getData = () => {
         const input = document.getElementById("user-input");
 
         searchForm.addEventListener("submit", async (e) => {
             e.preventDefault();
             saveLocation(input.value);
-            console.log(getLocation());
-            console.log(await WeatherData.getWeatherData(getLocation()));
+            await WeatherData.getWeatherData(readLocation());
         });
     };
     
-    return { getData };
+    return { getData, readLocation };
 })();
 
 export default UserInput;
