@@ -1,3 +1,5 @@
+import Units from "./toggle-units.js";
+
 const Display = (() => {
     const cityName = document.getElementById("city");
     const weatherIcon = document.getElementById("weather-icon");
@@ -6,6 +8,9 @@ const Display = (() => {
     const genericReport = document.getElementById("generic-report");
     const humidityLevel = document.getElementById("humidity");
     const wind = document.getElementById("wind-speed");
+    const toggleBtn = document.getElementById("units-btn");
+    const toggleText = document.getElementById("alt-units");
+
     const currentDeg = document.getElementById("current-deg");
     const feelsLikeDeg = document.getElementById("feels-like-deg");
     const windSpeed = document.getElementById("wind-unit");
@@ -47,10 +52,12 @@ const Display = (() => {
 
     const setUnits = (units) => {
         if (units === "metric") {
+            toggleText.textContent = "\u00B0F"
             currentDeg.textContent = " C";
             feelsLikeDeg.textContent = " C";
             windSpeed.textContent = " km/h";
         } else if (units === "imperial") {
+            toggleText.textContent = "\u00B0C"
             currentDeg.textContent = " F";
             feelsLikeDeg.textContent = " F";
             windSpeed.textContent = " mph";
@@ -65,7 +72,12 @@ const Display = (() => {
         setWeatherIcon(data.weather[0].description);
         humidityLevel.textContent = data.main.humidity;
         wind.textContent = data.wind.speed;
-        setUnits("imperial"); // default
+        setUnits("imperial");
+
+        toggleBtn.addEventListener("click", () => {
+            Units.changeUnit();
+            setUnits(Units.getCurrentUnit());
+        });
     };
 
     return { displayWeather };
