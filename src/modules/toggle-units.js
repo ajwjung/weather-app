@@ -1,4 +1,6 @@
 import Display from "./display-weather.js";
+import UserInput from "./user-input.js";
+import WeatherData from "./fetch-data.js";
 
 const Units = (() => {
     const toggleBtn = document.getElementById("units-btn");
@@ -15,10 +17,13 @@ const Units = (() => {
     const getCurrentUnit = () => displayedUnit;
 
     const updateDisplayUnits = () => {
-        toggleBtn.addEventListener("click", () => {
+        toggleBtn.addEventListener("click", async () => {
             Units.changeUnit();
-            const units = Units.getCurrentUnit();
-            Display.setUnits(units);
+            const newUnit = Units.getCurrentUnit();
+            Display.setUnits(newUnit);
+            const currentLocation = UserInput.readLocation();
+            const data = await WeatherData.getWeatherData(currentLocation, newUnit);
+            Display.displayWeather(data);
         });
     }
 
