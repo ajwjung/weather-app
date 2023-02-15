@@ -1,5 +1,3 @@
-import Units from "./toggle-units.js";
-
 const Display = (() => {
     const cityName = document.getElementById("city");
     const weatherIcon = document.getElementById("weather-icon");
@@ -8,7 +6,6 @@ const Display = (() => {
     const genericReport = document.getElementById("generic-report");
     const humidityLevel = document.getElementById("humidity");
     const wind = document.getElementById("wind-speed");
-    const toggleBtn = document.getElementById("units-btn");
     const toggleText = document.getElementById("alt-units");
 
     const currentDeg = document.getElementById("current-deg");
@@ -72,15 +69,9 @@ const Display = (() => {
         setWeatherIcon(data.weather[0].description);
         humidityLevel.textContent = data.main.humidity;
         wind.textContent = data.wind.speed;
-        setUnits("imperial");
-
-        toggleBtn.addEventListener("click", () => {
-            Units.changeUnit();
-            setUnits(Units.getCurrentUnit());
-        });
     };
 
-    return { displayWeather };
+    return { setUnits, displayWeather };
 })();
 
 export default Display;
