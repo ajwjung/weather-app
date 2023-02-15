@@ -13,7 +13,7 @@
         <div class="form-container">
             <form>
                 <input type="text" id="user-input" name="location" placeholder="Search a city" required>
-                <button type="submit">Search</button>
+                <button type="submit" id="submit-search">Search</button>
             </form>
         </div>
         <div class="weather-container">
@@ -27,8 +27,13 @@
                 </div>
             </div>
             <div class="other-info-container">
-                <p>Humidity: <span id="humidity"></span><span>%</span></p>
-                <p>Wind: <span id="wind-speed"></span><span id="wind-unit"></span></p>
+                <div class="info">
+                    <p>Humidity: <span id="humidity"></span><span>%</span></p>
+                    <p>Wind: <span id="wind-speed"></span><span id="wind-unit"></span></p>
+                </div>
+                <div class="toggle-container">
+                    <button id="units-btn"><span id="alt-units"></span></button>
+                </div>
             </div>
         </div>
     </div>
