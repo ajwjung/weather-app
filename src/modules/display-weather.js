@@ -10,6 +10,12 @@ const Display = (() => {
   const humidityLevel = document.getElementById("humidity");
   const wind = document.getElementById("wind-speed");
   const toggleText = document.getElementById("alt-units");
+  const dailyReport = document.querySelectorAll(".daily-report");
+  const dayOne = document.getElementById("day-one");
+  const dayTwo = document.getElementById("day-two");
+  const dayThree = document.getElementById("day-three");
+  const dayFour = document.getElementById("day-four");
+  const dayFive = document.getElementById("day-five");
 
   const currentDeg = document.getElementById("current-deg");
   const feelsLikeDeg = document.getElementById("feels-like-deg");
@@ -137,7 +143,26 @@ const Display = (() => {
     }
   };
 
-  const displayWeather = (data) => {
+  const extractData = (data) => {
+    // Get every 8th object (eight 3-hour reports = 24 hours)
+    const forecastData = [];
+
+    for (let i = 0; i < data.list.length; i+= 8) {
+      forecastData.push(data.list[i]);
+    };
+    
+    console.log(forecastData);
+    
+    return forecastData;
+  };
+
+  const convertDate = (utcDt) => {
+    const date = new Date(utcDt * 1000);
+    return date.toLocaleString("en", { weekday: "short" });
+
+  };
+
+  const displayCurrentWeather = (data) => {
     setTheme(data.weather[0].main);
     cityName.textContent = `${data.name}, ${data.sys.country}`;
     timestamp.textContent = getCurrentTimestamp(data.timezone);
@@ -151,7 +176,16 @@ const Display = (() => {
     wind.textContent = data.wind.speed;
   };
 
-  return { setUnits, displayWeather };
+  const displayFiveDayWeather = (data) => {
+    const fiveDayData = extractData(data);
+    for (let i = 0; i < dailyReport.length; i += 1) {
+      const [dayOfWeek, img, temperatureDiv] = dailyReport[i].children;
+      dayOfWeek.textContent = convertDate(fiveDayData[i].dt);
+
+    };
+  };
+
+  return { setUnits, displayCurrentWeather, displayFiveDayWeather };
 })();
 
 export default Display;

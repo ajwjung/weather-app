@@ -7,7 +7,9 @@ const LoadPage = (() => {
   // Default load
   window.addEventListener("load", async () => {
     const data = await WeatherData.getWeatherData("San Francisco", "imperial");
-    Display.displayWeather(data);
+    Display.displayCurrentWeather(data);
+    const fiveDayData = await WeatherData.getFiveDayForecast("San Francisco", "imperial");
+    Display.displayFiveDayWeather(fiveDayData);
     Display.setUnits("imperial");
   });
 

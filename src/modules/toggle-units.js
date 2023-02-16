@@ -23,7 +23,7 @@ const Units = (() => {
       Display.setUnits(newUnit);
       const currentLocation = UserInput.readLocation();
       const data = await WeatherData.getWeatherData(currentLocation, newUnit);
-      Display.displayWeather(data);
+      Display.displayCurrentWeather(data);
     });
   };
 

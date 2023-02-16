@@ -23,8 +23,10 @@ const UserInput = (() => {
     searchForm.addEventListener("submit", async (e) => {
       e.preventDefault();
       saveLocation(input.value);
-      const data = await WeatherData.getWeatherData(readLocation(), "imperial");
-      Display.displayWeather(data);
+      const currentWeatherData = await WeatherData.getWeatherData(readLocation(), "imperial");
+      Display.displayCurrentWeather(currentWeatherData);
+      const fiveDayData = await WeatherData.getFiveDayForecast(readLocation(), "imperial");
+      Display.displayFiveDayWeather(fiveDayData);
       clearSearchBar();
     });
   };
