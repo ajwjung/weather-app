@@ -155,6 +155,7 @@ form {
 /* Styles for the five-day weekly forecast */
 .five-day-container {
   grid-row: 3;
+  gap: var(--large-gap);
 }
 
 .daily-weather-icon {
