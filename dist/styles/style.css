@@ -63,18 +63,24 @@ form {
 #user-input {
     height: 1.65rem;
     width: 100%;
-    background: rgba(245, 245, 245, 0.3);
-    border: 1px solid white;
+}
+
+#user-input,
+#submit-search,
+#units-btn {
+    background: rgb(255, 255, 255, 0.3);
+    border: 1px solid rgb(245, 245, 245);
     border-radius: 5px;
+}
+
+#submit-search,
+#units-btn{ 
+    cursor: pointer;
 }
 
 #submit-search {
     height: 2rem;
     width: 5rem;
-    background: rgb(255, 255, 255, 0.3);
-    border: 1px solid white;
-    border-radius: 5px;
-    cursor: pointer;
 }
 
 .weather-container {
@@ -121,19 +127,15 @@ form {
 #units-btn {
     height: 35px;
     width: 90px;
-    background: rgb(255, 255, 255, 0.3);
-    border: 2px solid white;
-    border-radius: 5px;
-    cursor: pointer;
 }
 
+#submit-search:hover,
 #units-btn:hover {
-    background: rgb(255, 255, 255, 0.6);
+    background: rgb(255, 255, 255, 0.5);
 }
 
 #submit-search:active,
 #units-btn:active {
-    background: rgb(255, 255, 255, 0.6);
     transform: translateY(2px)
 }
 
