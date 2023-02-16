@@ -38,6 +38,13 @@ const Display = (() => {
     )}`;
   };
 
+  const convertDate = (utcDt) => {
+    const days = ["Sun", "Mon", "Tues", "Wed", "Thur", "Fri", "Sat"];
+    const date = new Date(utcDt);
+    
+    return days[date.getDay()];
+  };
+
   const getWeatherIcon = (weather) => {
     switch (weather) {
       case "Clear":
@@ -143,12 +150,6 @@ const Display = (() => {
     return forecastData;
   };
 
-  const convertDate = (utcDt) => {
-    const date = new Date(utcDt * 1000);
-    return date.toLocaleString("en", { weekday: "short" });
-
-  };
-
   const displayCurrentWeather = (data) => {
     setTheme(data.weather[0].main);
     cityName.textContent = `${data.name}, ${data.sys.country}`;
@@ -169,7 +170,7 @@ const Display = (() => {
     const fiveDayData = extractData(data);
     for (let i = 0; i < dailyReport.length; i += 1) {
       const [dayOfWeek, img] = dailyReport[i].children;
-      dayOfWeek.textContent = convertDate(fiveDayData[i].dt);
+      dayOfWeek.textContent = convertDate(fiveDayData[i].dt_txt);
       const [iconSrc, svgFilter] = getWeatherIcon(fiveDayData[i].weather[0].main);
       img.src = iconSrc;
       img.className = svgFilter;
