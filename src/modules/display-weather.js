@@ -54,7 +54,7 @@ const Display = (() => {
             case "Dust":
             case "Mist":
                 weatherIcon.src = "../src/imgs/snowflake.svg";
-                weatherIcon.className = "darkgray-filter";
+                weatherIcon.className = "blue-filter";
                 break;
             default:
                 weatherIcon.src = "../src/imgs/thermometer.svg"
