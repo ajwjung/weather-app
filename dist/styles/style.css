@@ -14,8 +14,12 @@ body {
     color: rgb(245, 245, 245);
 }
 
+h1 {
+    margin: 0;
+}
+
 p {
-    margin: 0.5rem;
+    margin: 0;
 }
 
 .content,
@@ -39,7 +43,23 @@ p {
 .content {
     height: 100%;
     width: 100%;
-    gap: var(--large-gap);
+    gap: var(--small-gap);
+    justify-content: flex-start;
+}
+
+.form-container {
+    margin-top: 8rem;
+    height: 3rem;
+}
+
+#user-input {
+    height: 1.2rem;
+    background: rgb(245, 245, 245);
+    border: none;
+}
+
+#submit-search {
+    height: 1.5rem;
 }
 
 .weather-container {
