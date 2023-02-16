@@ -1,5 +1,8 @@
 :root {
-    --svg-filter: invert(100%) sepia(0%) saturate(4816%) hue-rotate(196deg) brightness(115%) contrast(92%);
+    --white-filter: invert(96%) sepia(100%) saturate(18%) hue-rotate(284deg) brightness(106%) contrast(104%);
+    --lightgray-filter: invert(59%) sepia(10%) saturate(490%) hue-rotate(158deg) brightness(98%) contrast(81%);
+    --darkgray-filter: invert(0%) sepia(11%) saturate(1230%) hue-rotate(349deg) brightness(92%) contrast(75%);
+    --blue-filter: invert(20%) sepia(14%) saturate(1570%) hue-rotate(183deg) brightness(96%) contrast(93%);
     --large-gap: 3rem;
     --small-gap: 1.5rem;
 }
@@ -10,8 +13,6 @@ body {
     box-sizing: border-box;
     height: 100vh;
     width: 100vw;
-    background: linear-gradient(to bottom, rgb(18, 21, 46), rgb(36, 38, 51));
-    color: rgb(245, 245, 245);
 }
 
 h1 {
@@ -82,10 +83,6 @@ p {
     height: 100%;
 }
 
-#weather-icon {
-    filter: var(--svg-filter);
-}
-
 .temp-container {
     display: flex;
     flex-direction: column;
@@ -123,4 +120,20 @@ p {
 #units-btn:active {
     background: rgb(255, 255, 255, 0.6);
     transform: translateY(2px)
+}
+
+.white-filter {
+    filter: var(--white-filter);
+}
+
+.lightgray-filter {
+    filter: var(--lightgray-filter);
+}
+
+.darkgray-filter {
+    filter: var(--darkgray-filter);
+}
+
+.blue-filter {
+    filter: var(--blue-filter);
 }

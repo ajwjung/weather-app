@@ -1,4 +1,5 @@
 const Display = (() => {
+    const body = document.querySelector("body");
     const cityName = document.getElementById("city");
     const timestamp = document.getElementById("date");
     const weatherIcon = document.getElementById("weather-icon");
@@ -31,31 +32,66 @@ const Display = (() => {
 
     const setWeatherIcon = (weather) => {
         switch (weather) {
-            case "clear sky":
+            case "Clear":
                 weatherIcon.src = "../src/imgs/weather-sunny.svg";
+                weatherIcon.className = "blue-filter";
                 break;
-            case "few clouds":
-                weatherIcon.src = "../src/imgs/weather-partly-cloudy.svg";
-                break;
-            case "scattered clouds":
-            case "broken clouds":
+            case "Clouds":
                 weatherIcon.src = "../src/imgs/clouds.svg";
+                weatherIcon.className = "darkgray-filter";
                 break;
-            case "shower rain":
-            case "rain":
+            case "Rain":
                 weatherIcon.src = "../src/imgs/weather-pouring.svg";
+                weatherIcon.className = "white-filter";
                 break;
-            case "thunderstorm":
+            case "Thunderstorm":
                 weatherIcon.src = "../src/imgs/weather-lightning.svg";
+                weatherIcon.className = "white-filter";
                 break;
-            case "snow":
+            case "Snow":
+            case "Smoke":
+            case "Haze":
+            case "Dust":
+            case "Mist":
                 weatherIcon.src = "../src/imgs/snowflake.svg";
-                break;
-            case "mist":
-                weatherIcon.src = "../src/imgs/weather-fog.svg";
+                weatherIcon.className = "darkgray-filter";
                 break;
             default:
-                weatherIcon.src = "../src/imgs/01d.png"
+                weatherIcon.src = "../src/imgs/thermometer.svg"
+                weatherIcon.className = "blue-filter";
+        }
+    };
+
+    const setBackground = (weather) => {
+        switch (weather) {
+            case "Clear":
+                body.style.background = "linear-gradient(to bottom, rgb(109, 180, 207), rgb(245, 236, 218))";
+                body.style.color = "#2c3853";
+                break;
+            case "Clouds":
+                body.style.background = "linear-gradient(to bottom, rgb(133, 149, 158), rgb(200, 200, 200))";
+                body.style.color = "#202020";
+                break;
+            case "Drizzle":
+            case "Rain":
+                body.style.background = "linear-gradient(to bottom, rgb(68, 77, 82), rgb(140, 146, 148))";
+                body.style.color = "white";
+                break;
+            case "Thunderstorm":
+                body.style.background = "linear-gradient(to bottom, rgb(19, 23, 26), rgb(77, 83, 85))";
+                body.style.color = "white";
+                break;
+            case "Snow":
+            case "Smoke":
+            case "Haze":
+            case "Dust":
+            case "Mist":
+                body.style.background = "linear-gradient(to bottom, rgb(134, 141, 146), rgb(216, 230, 235))";
+                body.style.color = "#2c4374";
+                break;
+            default:
+                body.style.background = "linear-gradient(to bottom, rgb(109, 180, 207), rgb(245, 236, 218))";
+                body.color = "white";
         }
     };
 
@@ -74,12 +110,13 @@ const Display = (() => {
     };
 
     const displayWeather = (data) => {
+        setBackground(data.weather[0].main);
         cityName.textContent = `${data.name}, ${data.sys.country}`;
         timestamp.textContent = getCurrentTimestamp(data.timezone);
         currentTemp.textContent = `${Math.floor(data.main.temp)}\u00B0`;
         feelsLike.textContent = `${Math.floor(data.main.feels_like)}\u00B0`;
         genericReport.textContent = capitalizeFirstLetter(data.weather[0].description);
-        setWeatherIcon(data.weather[0].description);
+        setWeatherIcon(data.weather[0].main);
         humidityLevel.textContent = data.main.humidity;
         wind.textContent = data.wind.speed;
     };
