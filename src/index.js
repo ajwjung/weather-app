@@ -7,12 +7,18 @@ const LoadPage = (() => {
   // Default load
   window.addEventListener("load", async () => {
     try {
-      const data = await WeatherData.getWeatherData("San Francisco", "imperial");
+      const data = await WeatherData.getWeatherData(
+        "San Francisco",
+        "imperial"
+      );
       Display.displayCurrentWeather(data);
-      const fiveDayData = await WeatherData.getFiveDayForecast("San Francisco", "imperial");
+      const fiveDayData = await WeatherData.getFiveDayForecast(
+        "San Francisco",
+        "imperial"
+      );
       Display.displayFiveDayWeather(fiveDayData);
       Display.setUnits("imperial");
-    } catch(error) {
+    } catch (error) {
       alert(error);
     }
   });

@@ -17,7 +17,7 @@ const Display = (() => {
   const currentDeg = document.getElementById("current-deg");
   const feelsLikeDeg = document.getElementById("feels-like-deg");
   const windSpeed = document.getElementById("wind-unit");
-  const fiveDayUnits = document.querySelectorAll(".deg-unit")
+  const fiveDayUnits = document.querySelectorAll(".deg-unit");
 
   const capitalizeFirstLetter = (string) => {
     const firstLetter = string.charAt(0).toUpperCase();
@@ -41,7 +41,7 @@ const Display = (() => {
   const convertDate = (utcDt) => {
     const days = ["Sun", "Mon", "Tues", "Wed", "Thur", "Fri", "Sat"];
     const date = new Date(utcDt);
-    
+
     return days[date.getDay()];
   };
 
@@ -132,13 +132,17 @@ const Display = (() => {
       currentDeg.textContent = " C";
       feelsLikeDeg.textContent = " C";
       windSpeed.textContent = " km/h";
-      fiveDayUnits.forEach(div => { div.textContent = "\u00B0C" });
+      fiveDayUnits.forEach((div) => {
+        div.textContent = "\u00B0C";
+      });
     } else if (units === "imperial") {
       toggleText.textContent = "\u00B0C";
       currentDeg.textContent = " F";
       feelsLikeDeg.textContent = " F";
       windSpeed.textContent = " mph";
-      fiveDayUnits.forEach(div => { div.textContent = "\u00B0F" });
+      fiveDayUnits.forEach((div) => {
+        div.textContent = "\u00B0F";
+      });
     }
   };
 
@@ -146,10 +150,10 @@ const Display = (() => {
     // Get every 8th object (eight 3-hour reports = 24 hours)
     const forecastData = [];
 
-    for (let i = 0; i < data.list.length; i+= 8) {
+    for (let i = 0; i < data.list.length; i += 8) {
       forecastData.push(data.list[i]);
-    };
-        
+    }
+
     return forecastData;
   };
 
@@ -174,12 +178,14 @@ const Display = (() => {
     for (let i = 0; i < dailyReport.length; i += 1) {
       const [dayOfWeek, img] = dailyReport[i].children;
       dayOfWeek.textContent = convertDate(fiveDayData[i].dt_txt);
-      const [iconSrc, svgFilter] = getWeatherIcon(fiveDayData[i].weather[0].main);
+      const [iconSrc, svgFilter] = getWeatherIcon(
+        fiveDayData[i].weather[0].main
+      );
       img.src = iconSrc;
       img.className = svgFilter;
       dailyHighTemps[i].textContent = Math.floor(fiveDayData[i].main.temp_max);
       dailyLowTemps[i].textContent = Math.floor(fiveDayData[i].main.temp_min);
-    };
+    }
   };
 
   return { setUnits, displayCurrentWeather, displayFiveDayWeather };
