@@ -55,6 +55,8 @@ const Display = (() => {
         return ["../src/imgs/weather-pouring.svg", "white-filter"];
       case "Thunderstorm":
         return ["../src/imgs/weather-lightning.svg", "white-filter"];
+      case "Fog":
+        return ["../src/imgs/weather-fog.svg", "blue-filter"];
       case "Snow":
       case "Smoke":
       case "Haze":
@@ -101,6 +103,7 @@ const Display = (() => {
           btn.style.color = "white";
         });
         break;
+      case "Fog":
       case "Snow":
       case "Smoke":
       case "Haze":
