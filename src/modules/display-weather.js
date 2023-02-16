@@ -61,12 +61,12 @@ const Display = (() => {
 
     const setUnits = (units) => {
         if (units === "metric") {
-            toggleText.textContent = "\u00B0F"
+            toggleText.style.background = "\u00B0F";
             currentDeg.textContent = " C";
             feelsLikeDeg.textContent = " C";
             windSpeed.textContent = " km/h";
         } else if (units === "imperial") {
-            toggleText.textContent = "\u00B0C"
+            toggleText.textContent = "\u00B0C";
             currentDeg.textContent = " F";
             feelsLikeDeg.textContent = " F";
             windSpeed.textContent = " mph";
@@ -74,7 +74,6 @@ const Display = (() => {
     };
 
     const displayWeather = (data) => {
-        console.log(data);
         cityName.textContent = `${data.name}, ${data.sys.country}`;
         timestamp.textContent = getCurrentTimestamp(data.timezone);
         currentTemp.textContent = `${Math.floor(data.main.temp)}\u00B0`;
