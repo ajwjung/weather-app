@@ -10,7 +10,7 @@
   --blue-filter: invert(20%) sepia(14%) saturate(1570%) hue-rotate(183deg)
     brightness(96%) contrast(93%);
   --large-gap: 3rem;
-  --small-gap: 1.5rem;
+  --small-gap: 1rem;
   --font: "Zilla Slab", serif;
 }
 
@@ -32,18 +32,20 @@ p {
   margin: 0;
 }
 
-.content,
+body,
+.form-container,
+form,
 .weather-container,
 .general-container,
 .other-info-container,
 .info,
-.toggle-container {
+.toggle-container,
+.seven-day-container {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.content,
 .weather-container,
 .info,
 .toggle-container {
@@ -51,26 +53,24 @@ p {
 }
 
 .content {
-  height: 100%;
-  width: 100%;
-  gap: var(--small-gap);
-  justify-content: flex-start;
+  height: 100vh;
+  width: 50vw;
+  display: grid;
+  grid-template-rows: 0.5fr 2fr 1fr;
 }
 
 .form-container {
-  margin-top: 8rem;
-  height: 3rem;
+  grid-row: 1;
 }
 
 form {
-  display: flex;
-  align-items: center;
+  margin-top: var(--large-gap);
   gap: var(--small-gap);
 }
 
 #user-input {
   height: 1.65rem;
-  width: 100%;
+  width: 25vw;
 }
 
 #user-input,
@@ -91,15 +91,33 @@ form {
   width: 5rem;
 }
 
+#units-btn {
+  height: 35px;
+  width: 90px;
+}
+
+#submit-search:hover,
+#units-btn:hover {
+  background: rgb(255, 255, 255, 0.5);
+}
+
+#submit-search:active,
+#units-btn:active {
+  transform: translateY(2px);
+}
+
+#alt-units {
+  font-weight: 600;
+}
+
 .weather-container {
-  height: 50%;
-  width: 50%;
   gap: var(--small-gap);
+  grid-row: 2;
 }
 
 .general-container {
   height: 40%;
-  gap: var(--small-gap);
+  gap: var(--large-gap);
 }
 
 #generic-report {
@@ -132,24 +150,17 @@ form {
   align-items: flex-start;
 }
 
-#units-btn {
-  height: 35px;
-  width: 90px;
+/* Styles for the seven-day weekly forecast */
+.seven-day-container {
+  grid-row: 3;
 }
 
-#submit-search:hover,
-#units-btn:hover {
-  background: rgb(255, 255, 255, 0.5);
+.daily-weather-icon {
+  height: 50%;
+  width: 50%;
 }
 
-#submit-search:active,
-#units-btn:active {
-  transform: translateY(2px);
-}
-
-#alt-units {
-  font-weight: 600;
-}
+/* Recolors svg icons */
 
 .white-filter {
   filter: var(--white-filter);
