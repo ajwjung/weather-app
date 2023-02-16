@@ -28,7 +28,7 @@ const Display = (() => {
         const localTimeAtLocation = utcTime + (locationTimezone * 1000); // convert s to ms
         const localTimeDate = new Date(localTimeAtLocation);
 
-        return `${localTimeDate.toDateString()}, ${localTimeDate.getHours()}:${localTimeDate.getMinutes()}`;
+        return `${localTimeDate.toDateString()}, ${localTimeDate.toLocaleTimeString([], {hour: "2-digit", minute: "2-digit"})}`;
     };
 
     const setWeatherIcon = (weather) => {
