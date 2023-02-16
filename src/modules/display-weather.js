@@ -139,9 +139,7 @@ const Display = (() => {
     for (let i = 0; i < data.list.length; i+= 8) {
       forecastData.push(data.list[i]);
     };
-    
-    console.log(forecastData);
-    
+        
     return forecastData;
   };
 
