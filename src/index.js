@@ -6,11 +6,15 @@ import Units from "./modules/toggle-units.js";
 const LoadPage = (() => {
   // Default load
   window.addEventListener("load", async () => {
-    const data = await WeatherData.getWeatherData("San Francisco", "imperial");
-    Display.displayCurrentWeather(data);
-    const fiveDayData = await WeatherData.getFiveDayForecast("San Francisco", "imperial");
-    Display.displayFiveDayWeather(fiveDayData);
-    Display.setUnits("imperial");
+    try {
+      const data = await WeatherData.getWeatherData("San Francisco", "imperial");
+      Display.displayCurrentWeather(data);
+      const fiveDayData = await WeatherData.getFiveDayForecast("San Francisco", "imperial");
+      Display.displayFiveDayWeather(fiveDayData);
+      Display.setUnits("imperial");
+    } catch(error) {
+      alert(error);
+    }
   });
 
   // Handles event when user searches a location
