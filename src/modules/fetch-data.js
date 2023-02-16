@@ -9,13 +9,29 @@ const WeatherData = (() => {
 
       return data;
     } catch (error) {
-      console.log(error);
+      alert(error);
+    }
+
+    return null;
+  };
+
+  async function getFiveDayForecast(location, units) {
+    try {
+      const API_KEY = "f6d50020f2b429ca9a34a9206321e0c7";
+      const response = await fetch(
+        `https://api.openweathermap.org/data/2.5/forecast?q=${location}&units=${units}&appid=${API_KEY}`, {mode: "cors"}
+      );
+      const data = await response.json();
+
+      return data;
+    } catch (error) {
+      alert(error);
     }
 
     return null;
   }
 
-  return { getWeatherData };
+  return { getWeatherData, getFiveDayForecast };
 })();
 
 export default WeatherData;
