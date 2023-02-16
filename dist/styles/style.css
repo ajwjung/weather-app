@@ -158,6 +158,10 @@ form {
   gap: var(--large-gap);
 }
 
+.daily-report {
+  min-width: 60px;
+}
+
 .daily-weather-icon {
   height: 50%;
   width: 50%;
