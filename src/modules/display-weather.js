@@ -29,20 +29,18 @@ const Display = (() => {
     const currentTime = date.getTime(); // milliseconds
     const localOffsetFromUTC = date.getTimezoneOffset() * 60000; // convert mins to ms
     const utcTime = currentTime + localOffsetFromUTC; // milliseconds
-    const localTimeAtLocation = utcTime + locationTimezone * 1000; // convert s to ms
+    const localTimeAtLocation = utcTime + (locationTimezone * 1000); // convert s to ms
     const localTimeDate = new Date(localTimeAtLocation);
 
-    return `${localTimeDate.toDateString()}, ${localTimeDate.toLocaleTimeString(
-      [],
-      { hour: "2-digit", minute: "2-digit" }
-    )}`;
+    return localTimeDate;
   };
 
-  const convertDate = (utcDt) => {
-    const days = ["Sun", "Mon", "Tues", "Wed", "Thur", "Fri", "Sat"];
-    const date = new Date(utcDt);
-
-    return days[date.getDay()];
+  const getDayOfWeek = (utcDt, timezone) => {
+    const days = ["Sun", "Mon", "Tues", "Wed", "Thu", "Fri", "Sat"];
+    const timeInSec = utcDt + timezone; // seconds
+    const convertedTimestamp = new Date(timeInSec * 1000); // convert to seconds
+    
+    return days[convertedTimestamp.getDay()];
   };
 
   const getWeatherIcon = (weather) => {
@@ -160,7 +158,11 @@ const Display = (() => {
   const displayCurrentWeather = (data) => {
     setTheme(data.weather[0].main);
     cityName.textContent = `${data.name}, ${data.sys.country}`;
-    timestamp.textContent = getCurrentTimestamp(data.timezone);
+    const localTime = getCurrentTimestamp(data.timezone);
+    timestamp.textContent = `${localTime.toDateString()}, ${localTime.toLocaleTimeString(
+      [],
+      { hour: "2-digit", minute: "2-digit" }
+    )}`;
     currentTemp.textContent = `${Math.floor(data.main.temp)}\u00B0`;
     feelsLike.textContent = `${Math.floor(data.main.feels_like)}\u00B0`;
     genericReport.textContent = capitalizeFirstLetter(
@@ -177,7 +179,7 @@ const Display = (() => {
     const fiveDayData = extractData(data);
     for (let i = 0; i < dailyReport.length; i += 1) {
       const [dayOfWeek, img] = dailyReport[i].children;
-      dayOfWeek.textContent = convertDate(fiveDayData[i].dt_txt);
+      dayOfWeek.textContent = getDayOfWeek(data.city.timezone, fiveDayData[i].dt);
       const [iconSrc, svgFilter] = getWeatherIcon(
         fiveDayData[i].weather[0].main
       );
