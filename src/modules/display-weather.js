@@ -40,35 +40,24 @@ const Display = (() => {
     )}`;
   };
 
-  const setWeatherIcon = (weather) => {
+  const getWeatherIcon = (weather) => {
     switch (weather) {
       case "Clear":
-        weatherIcon.src = "../src/imgs/weather-sunny.svg";
-        weatherIcon.className = "blue-filter";
-        break;
+        return ["../src/imgs/weather-sunny.svg", "blue-filter"];
       case "Clouds":
-        weatherIcon.src = "../src/imgs/clouds.svg";
-        weatherIcon.className = "darkgray-filter";
-        break;
+        return ["../src/imgs/clouds.svg", "darkgray-filter"];
       case "Rain":
-        weatherIcon.src = "../src/imgs/weather-pouring.svg";
-        weatherIcon.className = "white-filter";
-        break;
+        return ["../src/imgs/weather-pouring.svg", "white-filter"];
       case "Thunderstorm":
-        weatherIcon.src = "../src/imgs/weather-lightning.svg";
-        weatherIcon.className = "white-filter";
-        break;
+        return ["../src/imgs/weather-lightning.svg", "white-filter"];
       case "Snow":
       case "Smoke":
       case "Haze":
       case "Dust":
       case "Mist":
-        weatherIcon.src = "../src/imgs/snowflake.svg";
-        weatherIcon.className = "blue-filter";
-        break;
+        return ["../src/imgs/snowflake.svg", "blue-filter"];
       default:
-        weatherIcon.src = "../src/imgs/thermometer.svg";
-        weatherIcon.className = "blue-filter";
+        return ["../src/imgs/thermometer.svg", "blue-filter"];
     }
   };
 
@@ -171,7 +160,9 @@ const Display = (() => {
     genericReport.textContent = capitalizeFirstLetter(
       data.weather[0].description
     );
-    setWeatherIcon(data.weather[0].main);
+    const [iconSrc, svgFilter] = getWeatherIcon(data.weather[0].main);
+    weatherIcon.src = iconSrc;
+    weatherIcon.className = svgFilter;
     humidityLevel.textContent = data.main.humidity;
     wind.textContent = data.wind.speed;
   };
@@ -181,7 +172,9 @@ const Display = (() => {
     for (let i = 0; i < dailyReport.length; i += 1) {
       const [dayOfWeek, img, temperatureDiv] = dailyReport[i].children;
       dayOfWeek.textContent = convertDate(fiveDayData[i].dt);
-
+      const [iconSrc, svgFilter] = getWeatherIcon(fiveDayData[i].weather[0].main);
+      img.src = iconSrc;
+      img.className = svgFilter;
     };
   };
 
