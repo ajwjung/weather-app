@@ -119,8 +119,8 @@ form {
 }
 
 #units-btn {
-    height: 30px;
-    width: 80px;
+    height: 35px;
+    width: 90px;
     background: rgb(255, 255, 255, 0.3);
     border: 2px solid white;
     border-radius: 5px;
@@ -135,6 +135,10 @@ form {
 #units-btn:active {
     background: rgb(255, 255, 255, 0.6);
     transform: translateY(2px)
+}
+
+#alt-units {
+    font-weight: 600;
 }
 
 .white-filter {

@@ -1,5 +1,6 @@
 const Display = (() => {
     const body = document.querySelector("body");
+    const buttons = document.querySelectorAll("button");
     const cityName = document.getElementById("city");
     const timestamp = document.getElementById("date");
     const weatherIcon = document.getElementById("weather-icon");
@@ -62,24 +63,28 @@ const Display = (() => {
         }
     };
 
-    const setBackground = (weather) => {
+    const setTheme = (weather) => {
         switch (weather) {
             case "Clear":
                 body.style.background = "linear-gradient(to bottom, rgb(109, 180, 207), rgb(245, 236, 218))";
                 body.style.color = "#2c3853";
+                buttons.forEach((btn) => { btn.style.color = "#2c3853" } );
                 break;
             case "Clouds":
                 body.style.background = "linear-gradient(to bottom, rgb(133, 149, 158), rgb(200, 200, 200))";
                 body.style.color = "#202020";
+                buttons.forEach((btn) => { btn.style.color = "#202020" } );
                 break;
             case "Drizzle":
             case "Rain":
                 body.style.background = "linear-gradient(to bottom, rgb(68, 77, 82), rgb(140, 146, 148))";
                 body.style.color = "white";
+                buttons.forEach((btn) => { btn.style.color = "white" } );
                 break;
             case "Thunderstorm":
                 body.style.background = "linear-gradient(to bottom, rgb(19, 23, 26), rgb(77, 83, 85))";
                 body.style.color = "white";
+                buttons.forEach((btn) => { btn.style.color = "white" } );
                 break;
             case "Snow":
             case "Smoke":
@@ -88,10 +93,12 @@ const Display = (() => {
             case "Mist":
                 body.style.background = "linear-gradient(to bottom, rgb(134, 141, 146), rgb(216, 230, 235))";
                 body.style.color = "#2c4374";
+                buttons.forEach((btn) => { btn.style.color = "#2c4374" } );
                 break;
             default:
                 body.style.background = "linear-gradient(to bottom, rgb(109, 180, 207), rgb(245, 236, 218))";
                 body.color = "white";
+                buttons.forEach((btn) => { btn.style.color = "white" } );
         }
     };
 
@@ -110,7 +117,7 @@ const Display = (() => {
     };
 
     const displayWeather = (data) => {
-        setBackground(data.weather[0].main);
+        setTheme(data.weather[0].main);
         cityName.textContent = `${data.name}, ${data.sys.country}`;
         timestamp.textContent = getCurrentTimestamp(data.timezone);
         currentTemp.textContent = `${Math.floor(data.main.temp)}\u00B0`;
