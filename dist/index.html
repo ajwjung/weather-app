@@ -1,42 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles/style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles/style.css" />
     <script type="module" src="../src/index.js" defer></script>
     <title>Weather App</title>
-</head>
-<body>
+  </head>
+  <body>
     <div class="content">
-        <div class="form-container">
-            <form>
-                <input type="text" id="user-input" name="location" placeholder="Search a city" required>
-                <button type="submit" id="submit-search">Search</button>
-            </form>
+      <div class="form-container">
+        <form>
+          <input
+            type="text"
+            id="user-input"
+            name="location"
+            placeholder="Search a city"
+            required
+          />
+          <button type="submit" id="submit-search">Search</button>
+        </form>
+      </div>
+      <div class="weather-container">
+        <h1 id="city">San Francisco, US</h1>
+        <p id="date">Date, Time</p>
+        <p id="generic-report">Mostly cloudy</p>
+        <div class="general-container">
+          <img src="../src/imgs/weather-cloudy.svg" id="weather-icon" />
+          <div class="temp-container">
+            <p><span id="current-temp"></span><span id="current-deg"></span></p>
+            <p>
+              Feels like: <span id="feels-like"></span
+              ><span id="feels-like-deg"></span>
+            </p>
+          </div>
         </div>
-        <div class="weather-container">
-            <h1 id="city">San Francisco, US</h1>
-            <p id="date">Date, Time</p>
-            <p id="generic-report">Mostly cloudy</p>
-            <div class="general-container">
-                <img src="../src/imgs/weather-cloudy.svg" id="weather-icon">
-                <div class="temp-container">
-                    <p><span id="current-temp"></span><span id="current-deg"></span></p>
-                    <p>Feels like: <span id="feels-like"></span><span id="feels-like-deg"></span></p>
-                </div>
-            </div>
-            <div class="other-info-container">
-                <div class="info">
-                    <p>Humidity: <span id="humidity"></span><span>%</span></p>
-                    <p>Wind: <span id="wind-speed"></span><span id="wind-unit"></span></p>
-                </div>
-                <div class="toggle-container">
-                    <button id="units-btn">View in <span id="alt-units"></span></button>
-                </div>
-            </div>
+        <div class="other-info-container">
+          <div class="info">
+            <p>Humidity: <span id="humidity"></span><span>%</span></p>
+            <p>
+              Wind: <span id="wind-speed"></span><span id="wind-unit"></span>
+            </p>
+          </div>
+          <div class="toggle-container">
+            <button id="units-btn">View in <span id="alt-units"></span></button>
+          </div>
         </div>
+      </div>
     </div>
-</body>
+  </body>
 </html>

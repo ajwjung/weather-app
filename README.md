@@ -16,4 +16,4 @@ To create a weather forecast site using [OpenWeatherMap's API](https://openweath
 
 **Optional**
 
-* Add a 'loading' component that displays from the time the form is submitted until the information comes back from the API
+- Add a 'loading' component that displays from the time the form is submitted until the information comes back from the API
