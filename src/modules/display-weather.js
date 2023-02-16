@@ -61,7 +61,7 @@ const Display = (() => {
 
     const setUnits = (units) => {
         if (units === "metric") {
-            toggleText.style.background = "\u00B0F";
+            toggleText.textContent = "\u00B0F";
             currentDeg.textContent = " C";
             feelsLikeDeg.textContent = " C";
             windSpeed.textContent = " km/h";
