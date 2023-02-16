@@ -40,7 +40,8 @@ form,
 .other-info-container,
 .info,
 .toggle-container,
-.seven-day-container {
+.five-day-container,
+.daily-report {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -48,7 +49,8 @@ form,
 
 .weather-container,
 .info,
-.toggle-container {
+.toggle-container,
+.daily-report {
   flex-direction: column;
 }
 
@@ -150,8 +152,8 @@ form {
   align-items: flex-start;
 }
 
-/* Styles for the seven-day weekly forecast */
-.seven-day-container {
+/* Styles for the five-day weekly forecast */
+.five-day-container {
   grid-row: 3;
 }
 
