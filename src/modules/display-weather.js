@@ -1,5 +1,6 @@
 const Display = (() => {
     const cityName = document.getElementById("city");
+    const timestamp = document.getElementById("date");
     const weatherIcon = document.getElementById("weather-icon");
     const currentTemp = document.getElementById("current-temp");
     const feelsLike = document.getElementById("feels-like");
@@ -15,6 +16,17 @@ const Display = (() => {
     const capitalizeFirstLetter = (string) => {
         const firstLetter = string.charAt(0).toUpperCase();
         return firstLetter + string.slice(1)
+    };
+
+    const getCurrentTimestamp = (locationTimezone) => {
+        const date = new Date();
+        const currentTime = date.getTime(); // milliseconds
+        const localOffsetFromUTC = date.getTimezoneOffset() * 60000; // convert mins to ms
+        const utcTime = currentTime + localOffsetFromUTC; // milliseconds
+        const localTimeAtLocation = utcTime + (locationTimezone * 1000); // convert s to ms
+        const localTimeDate = new Date(localTimeAtLocation);
+
+        return `${localTimeDate.toDateString()}, ${localTimeDate.getHours()}:${localTimeDate.getMinutes()}`;
     };
 
     const setWeatherIcon = (weather) => {
@@ -62,7 +74,9 @@ const Display = (() => {
     };
 
     const displayWeather = (data) => {
+        console.log(data);
         cityName.textContent = `${data.name}, ${data.sys.country}`;
+        timestamp.textContent = getCurrentTimestamp(data.timezone);
         currentTemp.textContent = `${Math.floor(data.main.temp)}\u00B0`;
         feelsLike.textContent = `${Math.floor(data.main.feels_like)}\u00B0`;
         genericReport.textContent = capitalizeFirstLetter(data.weather[0].description);
