@@ -11,15 +11,13 @@ const Display = (() => {
   const wind = document.getElementById("wind-speed");
   const toggleText = document.getElementById("alt-units");
   const dailyReport = document.querySelectorAll(".daily-report");
-  const dayOne = document.getElementById("day-one");
-  const dayTwo = document.getElementById("day-two");
-  const dayThree = document.getElementById("day-three");
-  const dayFour = document.getElementById("day-four");
-  const dayFive = document.getElementById("day-five");
+  const dailyHighTemps = document.querySelectorAll(".daily-high");
+  const dailyLowTemps = document.querySelectorAll(".daily-low");
 
   const currentDeg = document.getElementById("current-deg");
   const feelsLikeDeg = document.getElementById("feels-like-deg");
   const windSpeed = document.getElementById("wind-unit");
+  const fiveDayUnits = document.querySelectorAll(".deg-unit")
 
   const capitalizeFirstLetter = (string) => {
     const firstLetter = string.charAt(0).toUpperCase();
@@ -124,11 +122,13 @@ const Display = (() => {
       currentDeg.textContent = " C";
       feelsLikeDeg.textContent = " C";
       windSpeed.textContent = " km/h";
+      fiveDayUnits.forEach(div => { div.textContent = "\u00B0C" });
     } else if (units === "imperial") {
       toggleText.textContent = "\u00B0C";
       currentDeg.textContent = " F";
       feelsLikeDeg.textContent = " F";
       windSpeed.textContent = " mph";
+      fiveDayUnits.forEach(div => { div.textContent = "\u00B0F" });
     }
   };
 
@@ -170,11 +170,13 @@ const Display = (() => {
   const displayFiveDayWeather = (data) => {
     const fiveDayData = extractData(data);
     for (let i = 0; i < dailyReport.length; i += 1) {
-      const [dayOfWeek, img, temperatureDiv] = dailyReport[i].children;
+      const [dayOfWeek, img] = dailyReport[i].children;
       dayOfWeek.textContent = convertDate(fiveDayData[i].dt);
       const [iconSrc, svgFilter] = getWeatherIcon(fiveDayData[i].weather[0].main);
       img.src = iconSrc;
       img.className = svgFilter;
+      dailyHighTemps[i].textContent = Math.floor(fiveDayData[i].main.temp_max);
+      dailyLowTemps[i].textContent = Math.floor(fiveDayData[i].main.temp_min);
     };
   };
 

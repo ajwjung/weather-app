@@ -22,8 +22,10 @@ const Units = (() => {
       const newUnit = Units.getCurrentUnit();
       Display.setUnits(newUnit);
       const currentLocation = UserInput.readLocation();
-      const data = await WeatherData.getWeatherData(currentLocation, newUnit);
-      Display.displayCurrentWeather(data);
+      const todaysData = await WeatherData.getWeatherData(currentLocation, newUnit);
+      Display.displayCurrentWeather(todaysData);
+      const fiveDayData = await WeatherData.getFiveDayForecast(currentLocation, newUnit);
+      Display.displayFiveDayWeather(fiveDayData);
     });
   };
 
