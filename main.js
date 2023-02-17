@@ -22,23 +22,23 @@
         f = (e) => {
           switch (e) {
             case "Clear":
-              return ["../src/imgs/weather-sunny.svg", "blue-filter"];
+              return ["imgs/weather-sunny.svg", "blue-filter"];
             case "Clouds":
-              return ["../src/imgs/clouds.svg", "darkgray-filter"];
+              return ["imgs/clouds.svg", "darkgray-filter"];
             case "Rain":
-              return ["../src/imgs/weather-pouring.svg", "white-filter"];
+              return ["imgs/weather-pouring.svg", "white-filter"];
             case "Thunderstorm":
-              return ["../src/imgs/weather-lightning.svg", "white-filter"];
+              return ["imgs/weather-lightning.svg", "white-filter"];
             case "Fog":
-              return ["../src/imgs/weather-fog.svg", "blue-filter"];
+              return ["imgs/weather-fog.svg", "blue-filter"];
             case "Snow":
             case "Smoke":
             case "Haze":
             case "Dust":
             case "Mist":
-              return ["../src/imgs/snowflake.svg", "blue-filter"];
+              return ["imgs/snowflake.svg", "blue-filter"];
             default:
-              return ["../src/imgs/thermometer.svg", "blue-filter"];
+              return ["imgs/thermometer.svg", "blue-filter"];
           }
         };
       return {
