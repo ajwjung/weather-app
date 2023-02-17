@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles/style.css" />
+    <script type="module" src="../src/index.js" defer></script>
+    <title>Weather App</title>
+  </head>
+  <body>
+    <div class="content">
+      <div class="form-container">
+        <form>
+          <input
+            type="text"
+            id="user-input"
+            name="location"
+            placeholder="Search a city"
+            required
+          />
+          <button type="submit" id="submit-search">Search</button>
+        </form>
+      </div>
+      <div class="weather-container">
+        <h1 id="city"></h1>
+        <p id="date"></p>
+        <p id="generic-report"></p>
+        <div class="general-container">
+          <img src="../src/imgs/weather-cloudy.svg" id="weather-icon" />
+          <div class="temp-container">
+            <p><span id="current-temp"></span><span id="current-deg"></span></p>
+            <p>
+              Feels like: <span id="feels-like"></span
+              ><span id="feels-like-deg"></span>
+            </p>
+          </div>
+        </div>
+        <div class="other-info-container">
+          <div class="info">
+            <p>Humidity: <span id="humidity"></span><span>%</span></p>
+            <p>
+              Wind: <span id="wind-speed"></span><span id="wind-unit"></span>
+            </p>
+          </div>
+          <div class="toggle-container">
+            <button id="units-btn">View in <span id="alt-units"></span></button>
+          </div>
+        </div>
+      </div>
+      <div class="five-day-container">
+        <div class="daily-report" id="day-one">
+          <p class="date"></p>
+          <img src="../src/imgs/clouds.svg" class="daily-weather-icon" />
+          <div class="daily-temperature">
+            <p>
+              H: <span class="daily-high"></span><span class="deg-unit"></span>
+            </p>
+            <p>
+              L: <span class="daily-low"></span><span class="deg-unit"></span>
+            </p>
+          </div>
+        </div>
+        <div class="daily-report" id="day-two">
+          <p class="date"></p>
+          <img src="../src/imgs/clouds.svg" class="daily-weather-icon" />
+          <div class="daily-temperature">
+            <p>
+              H: <span class="daily-high"></span><span class="deg-unit"></span>
+            </p>
+            <p>
+              L: <span class="daily-low"></span><span class="deg-unit"></span>
+            </p>
+          </div>
+        </div>
+        <div class="daily-report" id="day-three">
+          <p class="date"></p>
+          <img src="../src/imgs/clouds.svg" class="daily-weather-icon" />
+          <div class="daily-temperature">
+            <p>
+              H: <span class="daily-high"></span><span class="deg-unit"></span>
+            </p>
+            <p>
+              L: <span class="daily-low"></span><span class="deg-unit"></span>
+            </p>
+          </div>
+        </div>
+        <div class="daily-report" id="day-four">
+          <p class="date"></p>
+          <img src="../src/imgs/clouds.svg" class="daily-weather-icon" />
+          <div class="daily-temperature">
+            <p>
+              H: <span class="daily-high"></span><span class="deg-unit"></span>
+            </p>
+            <p>
+              L: <span class="daily-low"></span><span class="deg-unit"></span>
+            </p>
+          </div>
+        </div>
+        <div class="daily-report" id="day-five">
+          <p class="date"></p>
+          <img src="../src/imgs/clouds.svg" class="daily-weather-icon" />
+          <div class="daily-temperature">
+            <p>
+              H: <span class="daily-high"></span><span class="deg-unit"></span>
+            </p>
+            <p>
+              L: <span class="daily-low"></span><span class="deg-unit"></span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,186 @@
+@import url("https://fonts.googleapis.com/css2?family=Zilla+Slab&display=swap");
+
+:root {
+  --white-filter: invert(96%) sepia(100%) saturate(18%) hue-rotate(284deg)
+    brightness(106%) contrast(104%);
+  --lightgray-filter: invert(59%) sepia(10%) saturate(490%) hue-rotate(158deg)
+    brightness(98%) contrast(81%);
+  --darkgray-filter: invert(0%) sepia(11%) saturate(1230%) hue-rotate(349deg)
+    brightness(92%) contrast(75%);
+  --blue-filter: invert(20%) sepia(14%) saturate(1570%) hue-rotate(183deg)
+    brightness(96%) contrast(93%);
+  --large-gap: 3rem;
+  --small-gap: 1rem;
+  --font: "Zilla Slab", serif;
+}
+
+body {
+  margin: 0 auto;
+  padding: 0;
+  box-sizing: border-box;
+  height: 100vh;
+  width: 100vw;
+  font-family: var(--font);
+  font-size: 1.1rem;
+}
+
+h1 {
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+body,
+.form-container,
+form,
+.weather-container,
+.general-container,
+.other-info-container,
+.info,
+.toggle-container,
+.five-day-container,
+.daily-report {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.weather-container,
+.info,
+.toggle-container,
+.daily-report {
+  flex-direction: column;
+}
+
+.content {
+  height: 100vh;
+  width: 50vw;
+  display: grid;
+  grid-template-rows: 0.5fr 2fr 1fr;
+}
+
+.form-container {
+  grid-row: 1;
+}
+
+form {
+  margin-top: var(--large-gap);
+  gap: var(--small-gap);
+}
+
+#user-input {
+  height: 1.65rem;
+  width: 25vw;
+}
+
+#user-input,
+#submit-search,
+#units-btn {
+  background: rgb(255, 255, 255, 0.3);
+  border: 1px solid rgb(245, 245, 245);
+  border-radius: 5px;
+}
+
+#submit-search,
+#units-btn {
+  cursor: pointer;
+}
+
+#submit-search {
+  height: 2rem;
+  width: 5rem;
+}
+
+#units-btn {
+  height: 35px;
+  width: 90px;
+}
+
+#submit-search:hover,
+#units-btn:hover {
+  background: rgb(255, 255, 255, 0.5);
+}
+
+#submit-search:active,
+#units-btn:active {
+  transform: translateY(2px);
+}
+
+#alt-units {
+  font-weight: 600;
+}
+
+.weather-container {
+  gap: var(--small-gap);
+  grid-row: 2;
+}
+
+.general-container {
+  height: 40%;
+  gap: var(--large-gap);
+}
+
+#generic-report {
+  font-size: 1.5rem;
+}
+
+#weather-icon {
+  height: 80%;
+}
+
+.temp-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#current-temp,
+#current-deg {
+  font-size: 4rem;
+}
+
+.other-info-container {
+  width: 40%;
+  justify-content: space-evenly;
+  gap: var(--large-gap);
+}
+
+.info {
+  align-items: flex-start;
+}
+
+/* Styles for the five-day weekly forecast */
+.five-day-container {
+  grid-row: 3;
+  gap: var(--large-gap);
+}
+
+.daily-report {
+  min-width: 60px;
+}
+
+.daily-weather-icon {
+  height: 50%;
+  width: 50%;
+}
+
+/* Recolors svg icons */
+
+.white-filter {
+  filter: var(--white-filter);
+}
+
+.lightgray-filter {
+  filter: var(--lightgray-filter);
+}
+
+.darkgray-filter {
+  filter: var(--darkgray-filter);
+}
+
+.blue-filter {
+  filter: var(--blue-filter);
+}
