@@ -1,5 +1,7 @@
 # Weather App
 
+* [Live Demo](https://ajwjung.github.io/weather-app/)
+
 ## Objective
 
 To create a weather forecast site using [OpenWeatherMap's API](https://openweathermap.org/api) to practice working with promises and APIs. Full details can be found on [The Odin Project's page](https://www.theodinproject.com/lessons/node-path-javascript-weather-app).
