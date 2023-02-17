@@ -29,7 +29,7 @@ const Display = (() => {
     const currentTime = date.getTime(); // milliseconds
     const localOffsetFromUTC = date.getTimezoneOffset() * 60000; // convert mins to ms
     const utcTime = currentTime + localOffsetFromUTC; // milliseconds
-    const localTimeAtLocation = utcTime + (locationTimezone * 1000); // convert s to ms
+    const localTimeAtLocation = utcTime + locationTimezone * 1000; // convert s to ms
     const localTimeDate = new Date(localTimeAtLocation);
 
     return localTimeDate;
@@ -39,7 +39,7 @@ const Display = (() => {
     const days = ["Sun", "Mon", "Tues", "Wed", "Thu", "Fri", "Sat"];
     const timeInSec = utcDt + timezone; // seconds
     const convertedTimestamp = new Date(timeInSec * 1000); // convert to seconds
-    
+
     return days[convertedTimestamp.getDay()];
   };
 
@@ -179,7 +179,10 @@ const Display = (() => {
     const fiveDayData = extractData(data);
     for (let i = 0; i < dailyReport.length; i += 1) {
       const [dayOfWeek, img] = dailyReport[i].children;
-      dayOfWeek.textContent = getDayOfWeek(data.city.timezone, fiveDayData[i].dt);
+      dayOfWeek.textContent = getDayOfWeek(
+        data.city.timezone,
+        fiveDayData[i].dt
+      );
       const [iconSrc, svgFilter] = getWeatherIcon(
         fiveDayData[i].weather[0].main
       );
