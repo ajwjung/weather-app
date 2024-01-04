@@ -17,6 +17,11 @@ const LoadPage = (() => {
         "imperial"
       );
       Display.displayFiveDayWeather(fiveDayData);
+      const threeHourData = await WeatherData.getThreeHourData(
+        "San Francisco",
+        "imperial"
+      );
+      Display.displayThreeHourWeather(threeHourData);
       Display.setUnits("imperial");
     } catch (error) {
       alert(error);

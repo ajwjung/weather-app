@@ -32,6 +32,11 @@ const UserInput = (() => {
         "imperial"
       );
       Display.displayFiveDayWeather(fiveDayData);
+      const threeHourData = await WeatherData.getThreeHourData(
+        readLocation(),
+        "imperial"
+      )
+      Display.displayThreeHourWeather(threeHourData);
       clearSearchBar();
     });
   };

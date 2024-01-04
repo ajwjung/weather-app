@@ -10,6 +10,7 @@ const Display = (() => {
   const humidityLevel = document.getElementById("humidity");
   const wind = document.getElementById("wind-speed");
   const toggleText = document.getElementById("alt-units");
+
   const dailyReport = document.querySelectorAll(".daily-report");
   const dailyHighTemps = document.querySelectorAll(".daily-high");
   const dailyLowTemps = document.querySelectorAll(".daily-low");
@@ -19,12 +20,19 @@ const Display = (() => {
   const windSpeed = document.getElementById("wind-unit");
   const fiveDayUnits = document.querySelectorAll(".deg-unit");
 
+  const threeHourReports = document.querySelectorAll(".hour-report");
+  const threeHourTemp = document.querySelectorAll(".three-hour-temp");
+
   const capitalizeFirstLetter = (string) => {
     const firstLetter = string.charAt(0).toUpperCase();
     return firstLetter + string.slice(1);
   };
 
   const getCurrentTimestamp = (locationTimezone) => {
+    /* Takes the timezone of the given/searched location
+    and offsets it with the current time in the user's timezone
+    to get the local time and date of the given/searched location */
+
     const date = new Date();
     const currentTime = date.getTime(); // milliseconds
     const localOffsetFromUTC = date.getTimezoneOffset() * 60000; // convert mins to ms
@@ -124,6 +132,7 @@ const Display = (() => {
     }
   };
 
+  // Toggles between Celsius and Fahrenheit units
   const setUnits = (units) => {
     if (units === "metric") {
       toggleText.textContent = "\u00B0F";
@@ -155,6 +164,7 @@ const Display = (() => {
     return forecastData;
   };
 
+  // Updates respective elements with weather data
   const displayCurrentWeather = (data) => {
     setTheme(data.weather[0].main);
     cityName.textContent = `${data.name}, ${data.sys.country}`;
@@ -177,23 +187,61 @@ const Display = (() => {
 
   const displayFiveDayWeather = (data) => {
     const fiveDayData = extractData(data);
+
     for (let i = 0; i < dailyReport.length; i += 1) {
       const [dayOfWeek, img] = dailyReport[i].children;
       dayOfWeek.textContent = getDayOfWeek(
         data.city.timezone,
         fiveDayData[i].dt
       );
+
       const [iconSrc, svgFilter] = getWeatherIcon(
         fiveDayData[i].weather[0].main
       );
+
       img.src = iconSrc;
-      img.className = svgFilter;
+      img.classList.add(svgFilter);
       dailyHighTemps[i].textContent = Math.floor(fiveDayData[i].main.temp_max);
       dailyLowTemps[i].textContent = Math.floor(fiveDayData[i].main.temp_min);
     }
   };
 
-  return { setUnits, displayCurrentWeather, displayFiveDayWeather };
+  const convertToTwelveHourClock = (date) => {
+    const hour = date.getHours();
+
+    return (hour > 12) ? `${hour - 12}pm` : `${hour}am`;
+  }
+
+  const displayThreeHourWeather = (data) => {
+    const dataForNext24Hrs = data.list.slice(0, 8);
+    const threeHourData = [];
+
+    // Get the time of day and weather forecast for the next 24h
+    dataForNext24Hrs.forEach(hourData => {
+      const date = new Date(hourData.dt * 1000);
+      const timeOfDay = convertToTwelveHourClock(date);
+
+      threeHourData.push({ 
+        timeOfDay,
+        weather: hourData.weather[0].main,
+        temp: hourData.main.temp,
+      });
+    });
+
+    // Update display with forecast
+    for (let i = 0; i < threeHourReports.length; i += 1) {
+      const [timeOfDay, img] = threeHourReports[i].children;
+      timeOfDay.textContent = threeHourData[i].timeOfDay;
+
+      const [iconSrc, svgFilter] = getWeatherIcon(threeHourData[i].weather);
+      img.src = iconSrc;
+      img.classList.add(svgFilter);
+
+      threeHourTemp[i].textContent = Math.floor(threeHourData[i].temp);
+    };
+  }
+
+  return { setUnits, displayCurrentWeather, displayFiveDayWeather, displayThreeHourWeather };
 })();
 
 export default Display;

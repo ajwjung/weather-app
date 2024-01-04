@@ -32,6 +32,11 @@ const Units = (() => {
         newUnit
       );
       Display.displayFiveDayWeather(fiveDayData);
+      const threeHourData = await WeatherData.getThreeHourData(
+        currentLocation,
+        newUnit
+      );
+      Display.displayThreeHourWeather(threeHourData);
     });
   };
 
