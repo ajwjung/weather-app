@@ -9,9 +9,12 @@
     brightness(92%) contrast(75%);
   --blue-filter: invert(20%) sepia(14%) saturate(1570%) hue-rotate(183deg)
     brightness(96%) contrast(93%);
-  --icon-size: 60px;
-    --large-gap: 3rem;
+  --white: rgb(225, 225, 225);
+  --icon-size: 50px;
+  --main-icon-size: 100px;
   --small-gap: 1rem;
+  --medium-gap: 2rem;
+  --large-gap: 3rem;
   --font: "Zilla Slab", serif;
 }
 
@@ -25,10 +28,7 @@ body {
   font-size: 1.1rem;
 }
 
-h1 {
-  margin: 0;
-}
-
+h1,
 p {
   margin: 0;
 }
@@ -38,7 +38,6 @@ body,
 form,
 .weather-container,
 .general-container,
-.other-info-container,
 .info,
 .toggle-container,
 .five-day-container,
@@ -56,10 +55,11 @@ form,
 }
 
 .content {
-  height: 100vh;
-  width: 50vw;
+  margin: 0 auto;
+  height: 100%;
   display: grid;
-  grid-template-rows: 0.5fr 2fr 1fr;
+  grid-template-rows: 0.5fr 2fr 0.8fr 1fr;
+  gap: var(--small-gap);
 }
 
 .form-container {
@@ -67,20 +67,21 @@ form,
 }
 
 form {
-  margin-top: var(--large-gap);
+  margin-top: var(--small-gap);
   gap: var(--small-gap);
 }
 
+/* Styles for search bar */
 #user-input {
   height: 1.65rem;
-  width: 25vw;
+  width: 35vw;
 }
 
 #user-input,
 #submit-search,
 #units-btn {
   background: rgb(255, 255, 255, 0.3);
-  border: 1px solid rgb(245, 245, 245);
+  border: 1px solid var(--white);
   border-radius: 5px;
 }
 
@@ -94,6 +95,7 @@ form {
   width: 5rem;
 }
 
+/* Styles for button to toggle displayed units */
 #units-btn {
   height: 35px;
   width: 90px;
@@ -113,9 +115,18 @@ form {
   font-weight: 600;
 }
 
+/* Styles for today's weather forecast */
 .weather-container {
   gap: var(--small-gap);
   grid-row: 2;
+}
+
+#city {
+  font-size: 1.6rem;
+}
+
+#generic-report {
+  font-size: 1.3rem;
 }
 
 .general-container {
@@ -123,16 +134,12 @@ form {
   gap: var(--large-gap);
 }
 
-#generic-report {
-  font-size: 1.5rem;
-}
-
 #weather-icon {
-  height: 80%;
+  height: var(--main-icon-size);
+  width: var(--main-icon-size);
 }
 
 .temp-container {
-  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -140,12 +147,13 @@ form {
 
 #current-temp,
 #current-deg {
-  font-size: 4rem;
+  font-size: 3rem;
 }
 
 .other-info-container {
-  width: 40%;
+  display: flex;
   justify-content: space-evenly;
+  align-items: center;
   gap: var(--large-gap);
 }
 
@@ -156,11 +164,18 @@ form {
 /* Styles for three-hour forecasts */
 .three-hour-container {
   grid-row: 3;
+  width: 80%;
+  margin: 0 auto;
+  margin-top: var(--small-gap);
+  overflow-x: scroll;
 
   display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  gap: 5px;
+  justify-content: flex-start;
+  gap: var(--small-gap);
+}
+
+.hour-report {
+  min-width: 40px;
 }
 
 .hour-report > p {
@@ -175,7 +190,7 @@ form {
 /* Styles for the five-day weekly forecast */
 .five-day-container {
   grid-row: 4;
-  gap: var(--large-gap);
+  gap: var(--small-gap);
 }
 
 .daily-report {
@@ -202,4 +217,135 @@ form {
 
 .blue-filter {
   filter: var(--blue-filter);
+}
+
+/* Styles for tablets */
+@media (min-width: 768px) {
+  #city {
+    font-size: 1.8rem;
+  }
+
+  .general-container,
+  .other-info-container {
+    gap: 4.5rem;
+  }
+
+  #generic-report {
+    font-size: 1.5rem;
+  }
+
+  .three-hour-container {
+    gap: var(--medium-gap);
+    padding: 0 var(--small-gap);
+  }
+
+  .five-day-container {
+    gap: var(--large-gap);
+  }
+}
+
+/* Styles for laptops */
+@media (min-width: 1024px) {
+  body {
+    font-size: 1.2rem;
+  }
+
+  #city {
+    font-size: 2rem;
+  }
+
+  #generic-report {
+    font-size: 1.6rem;
+  }
+
+  #units-btn {
+    height: 40px;
+    width: 100px;
+    font-size: 0.9rem;
+  }
+
+  .three-hour-container {
+    width: unset;
+  }
+}
+
+/* Styles for desktop */
+@media (min-width: 1440px) {
+  body {
+    font-size: 1.3rem;
+  }
+
+  .content {
+    grid-template-columns: 0.8fr 1.2fr;
+    grid-template-rows: 0.5fr 1.2fr 0.3fr 1fr 0.5fr;
+    gap: var(--medium-gap);
+  }
+
+  .form-container {
+    grid-column: 1 / span 2;
+    grid-row: 1;
+
+    margin-top: var(--small-gap);
+  }
+
+  form {
+    gap: var(--medium-gap);
+  }
+
+  #user-input {
+    width: 25vw;
+  }
+
+  .weather-container {
+    grid-column: 1;
+    grid-row: 2 / span 3;
+
+    gap: var(--medium-gap);
+  }
+
+  .general-container {
+    height: 30%;
+  }
+
+  #city {
+    font-size: 2.5rem;
+  }
+
+  #generic-report {
+    font-size: 2rem;
+  }
+
+  #units-btn {
+    height: 45px;
+    width: 110px;
+    line-height: 45px;
+    font-size: 1rem;
+  }
+  
+  .three-hour-container {
+    grid-column: 2;
+    grid-row: 2;
+
+    margin-top: 5rem;
+    gap: var(--small-gap);
+    overflow: unset;
+  }
+
+  .hour-report,
+  .daily-report {
+    width: 80px;
+  }
+
+  .five-day-container {
+    grid-column: 2;
+    grid-row: 4;
+
+    margin-top: -5rem;
+    gap: var(--large-gap);
+  }
+
+  .daily-weather-icon {
+    height: 80px;
+    width: 80px;
+  }
 }

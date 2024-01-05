@@ -235,7 +235,7 @@ const Display = (() => {
 
       const [iconSrc, svgFilter] = getWeatherIcon(threeHourData[i].weather);
       img.src = iconSrc;
-      img.classList.add(svgFilter);
+      img.classList = svgFilter;
 
       threeHourTemp[i].textContent = Math.floor(threeHourData[i].temp);
     };
