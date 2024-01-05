@@ -31,6 +31,8 @@ To create a weather forecast site using [OpenWeatherMap's API](https://openweath
 
 My weather forecast page displays both the current weather report and a 5-day report for a given location (default location is San Francisco). You can search for a location by city name or zip code to display the weather report for said location. You can also switch between displaying metric (°C) and imperial (°F) units by clicking the toggle button.
 
+**Update:** I updated the UI to be more responsive to different viewport sizes and also added a section that displays a forecast for the next 24h over three hour increments.
+
 ## Credits
 
 All svg icons used in my webpage were downloaded from [Material Design Icons](https://pictogrammers.com/library/mdi/).
