@@ -1,6 +1,6 @@
 # Weather App
 
-* [Live Demo](https://ajwjung.github.io/weather-app/)
+- [Live Demo](https://ajwjung.github.io/weather-app/)
 
 ## Objective
 

@@ -39,8 +39,8 @@ const WeatherData = (() => {
       // Fetch and convert city names/zip-codes to geo coordinates
       const coordinatesResponse = await fetch(
         ` http://api.openweathermap.org/geo/1.0/direct?q=${location}&limit=1&appid=${API_KEY}`,
-        { mode: "cors"}
-      )
+        { mode: "cors" }
+      );
       const coordinatesData = await coordinatesResponse.json();
       const { lat, lon } = coordinatesData[0];
 

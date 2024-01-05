@@ -209,19 +209,19 @@ const Display = (() => {
   const convertToTwelveHourClock = (date) => {
     const hour = date.getHours();
 
-    return (hour > 12) ? `${hour - 12}pm` : `${hour}am`;
-  }
+    return hour > 12 ? `${hour - 12}pm` : `${hour}am`;
+  };
 
   const displayThreeHourWeather = (data) => {
     const dataForNext24Hrs = data.list.slice(0, 8);
     const threeHourData = [];
 
     // Get the time of day and weather forecast for the next 24h
-    dataForNext24Hrs.forEach(hourData => {
+    dataForNext24Hrs.forEach((hourData) => {
       const date = new Date(hourData.dt * 1000);
       const timeOfDay = convertToTwelveHourClock(date);
 
-      threeHourData.push({ 
+      threeHourData.push({
         timeOfDay,
         weather: hourData.weather[0].main,
         temp: hourData.main.temp,
@@ -238,10 +238,15 @@ const Display = (() => {
       img.classList = svgFilter;
 
       threeHourTemp[i].textContent = Math.floor(threeHourData[i].temp);
-    };
-  }
+    }
+  };
 
-  return { setUnits, displayCurrentWeather, displayFiveDayWeather, displayThreeHourWeather };
+  return {
+    setUnits,
+    displayCurrentWeather,
+    displayFiveDayWeather,
+    displayThreeHourWeather,
+  };
 })();
 
 export default Display;
