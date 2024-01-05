@@ -3,8 +3,8 @@
   const e = (() => {
       const e = document.querySelector("body"),
         t = document.querySelectorAll("button"),
-        n = document.getElementById("city"),
-        r = document.getElementById("date"),
+        r = document.getElementById("city"),
+        n = document.getElementById("date"),
         a = document.getElementById("weather-icon"),
         o = document.getElementById("current-temp"),
         i = document.getElementById("feels-like"),
@@ -14,12 +14,14 @@
         d = document.getElementById("alt-units"),
         u = document.querySelectorAll(".daily-report"),
         m = document.querySelectorAll(".daily-high"),
-        g = document.querySelectorAll(".daily-low"),
-        y = document.getElementById("current-deg"),
-        h = document.getElementById("feels-like-deg"),
+        h = document.querySelectorAll(".daily-low"),
+        g = document.getElementById("current-deg"),
+        y = document.getElementById("feels-like-deg"),
         p = document.getElementById("wind-unit"),
         w = document.querySelectorAll(".deg-unit"),
-        f = (e) => {
+        f = document.querySelectorAll(".hour-report"),
+        b = document.querySelectorAll(".three-hour-temp"),
+        C = (e) => {
           switch (e) {
             case "Clear":
               return ["imgs/weather-sunny.svg", "blue-filter"];
@@ -45,24 +47,24 @@
         setUnits: (e) => {
           "metric" === e
             ? ((d.textContent = "°F"),
+              (g.textContent = " C"),
               (y.textContent = " C"),
-              (h.textContent = " C"),
               (p.textContent = " km/h"),
               w.forEach((e) => {
                 e.textContent = "°C";
               }))
             : "imperial" === e &&
               ((d.textContent = "°C"),
+              (g.textContent = " F"),
               (y.textContent = " F"),
-              (h.textContent = " F"),
               (p.textContent = " mph"),
               w.forEach((e) => {
                 e.textContent = "°F";
               }));
         },
         displayCurrentWeather: (d) => {
-          ((n) => {
-            switch (n) {
+          ((r) => {
+            switch (r) {
               case "Clear":
                 (e.style.background =
                   "linear-gradient(to bottom, rgb(109, 180, 207), rgb(245, 236, 218))"),
@@ -118,15 +120,15 @@
                   });
             }
           })(d.weather[0].main),
-            (n.textContent = `${d.name}, ${d.sys.country}`);
+            (r.textContent = `${d.name}, ${d.sys.country}`);
           const u = ((e) => {
             const t = new Date(),
-              n = t.getTime(),
-              r = 6e4 * t.getTimezoneOffset();
-            return new Date(n + r + 1e3 * e);
+              r = t.getTime(),
+              n = 6e4 * t.getTimezoneOffset();
+            return new Date(r + n + 1e3 * e);
           })(d.timezone);
           var m;
-          (r.textContent = `${u.toDateString()}, ${u.toLocaleTimeString([], {
+          (n.textContent = `${u.toDateString()}, ${u.toLocaleTimeString([], {
             hour: "2-digit",
             minute: "2-digit",
           })}`),
@@ -135,44 +137,80 @@
             (c.textContent =
               (m = d.weather[0].description).charAt(0).toUpperCase() +
               m.slice(1));
-          const [g, y] = f(d.weather[0].main);
-          (a.src = g),
-            (a.className = y),
+          const [h, g] = C(d.weather[0].main);
+          (a.src = h),
+            (a.className = g),
             (s.textContent = d.main.humidity),
             (l.textContent = d.wind.speed);
         },
         displayFiveDayWeather: (e) => {
           const t = ((e) => {
             const t = [];
-            for (let n = 0; n < e.list.length; n += 8) t.push(e.list[n]);
+            for (let r = 0; r < e.list.length; r += 8) t.push(e.list[r]);
             return t;
           })(e);
           for (let a = 0; a < u.length; a += 1) {
             const [o, i] = u[a].children;
             o.textContent =
-              ((n = e.city.timezone),
-              (r = t[a].dt),
+              ((r = e.city.timezone),
+              (n = t[a].dt),
               ["Sun", "Mon", "Tues", "Wed", "Thu", "Fri", "Sat"][
-                new Date(1e3 * (n + r)).getDay()
+                new Date(1e3 * (r + n)).getDay()
               ]);
-            const [c, s] = f(t[a].weather[0].main);
+            const [c, s] = C(t[a].weather[0].main);
             (i.src = c),
-              (i.className = s),
+              i.classList.add(s),
               (m[a].textContent = Math.floor(t[a].main.temp_max)),
-              (g[a].textContent = Math.floor(t[a].main.temp_min));
+              (h[a].textContent = Math.floor(t[a].main.temp_min));
           }
-          var n, r;
+          var r, n;
+        },
+        displayThreeHourWeather: (e) => {
+          const t = e.list.slice(0, 8),
+            r = [];
+          t.forEach((e) => {
+            const t = ((e) => {
+              const t = e.getHours();
+              return t > 12 ? t - 12 + "pm" : `${t}am`;
+            })(new Date(1e3 * e.dt));
+            r.push({
+              timeOfDay: t,
+              weather: e.weather[0].main,
+              temp: e.main.temp,
+            });
+          });
+          for (let e = 0; e < f.length; e += 1) {
+            const [t, n] = f[e].children;
+            t.textContent = r[e].timeOfDay;
+            const [a, o] = C(r[e].weather);
+            (n.src = a),
+              (n.classList = o),
+              (b[e].textContent = Math.floor(r[e].temp));
+          }
         },
       };
     })(),
     t = async function (e, t) {
       try {
-        const n = "f6d50020f2b429ca9a34a9206321e0c7",
-          r = await fetch(
-            `https://api.openweathermap.org/data/2.5/weather?q=${e}&units=${t}&appid=${n}`,
+        const r = "f6d50020f2b429ca9a34a9206321e0c7",
+          n = await fetch(
+            `https://api.openweathermap.org/data/2.5/weather?q=${e}&units=${t}&appid=${r}`,
             { mode: "cors" }
           );
-        return await r.json();
+        return await n.json();
+      } catch (e) {
+        alert(e);
+      }
+      return null;
+    },
+    r = async function (e, t) {
+      try {
+        const r = "f6d50020f2b429ca9a34a9206321e0c7",
+          n = await fetch(
+            `https://api.openweathermap.org/data/2.5/forecast?q=${e}&units=${t}&appid=${r}`,
+            { mode: "cors" }
+          );
+        return await n.json();
       } catch (e) {
         alert(e);
       }
@@ -180,72 +218,84 @@
     },
     n = async function (e, t) {
       try {
-        const n = "f6d50020f2b429ca9a34a9206321e0c7",
-          r = await fetch(
-            `https://api.openweathermap.org/data/2.5/forecast?q=${e}&units=${t}&appid=${n}`,
+        const r = "f6d50020f2b429ca9a34a9206321e0c7",
+          n = await fetch(
+            ` http://api.openweathermap.org/geo/1.0/direct?q=${e}&limit=1&appid=${r}`,
+            { mode: "cors" }
+          ),
+          a = await n.json(),
+          { lat: o, lon: i } = a[0],
+          c = await fetch(
+            `https://api.openweathermap.org/data/2.5/forecast?lat=${o}&lon=${i}&units=${t}&appid=${r}`,
             { mode: "cors" }
           );
-        return await r.json();
+        return await c.json();
       } catch (e) {
         alert(e);
       }
       return null;
     },
-    r = (() => {
-      const r = document.querySelector("form"),
-        a = document.getElementById("user-input");
-      let o = "San Francisco";
-      const i = () => o;
+    a = (() => {
+      const a = document.querySelector("form"),
+        o = document.getElementById("user-input");
+      let i = "San Francisco";
+      const c = () => i;
       return {
         getData: () => {
-          const c = document.getElementById("user-input");
-          r.addEventListener("submit", async (r) => {
-            var s;
-            r.preventDefault(), (s = c.value), (o = s);
-            const l = await t(i(), "imperial");
-            e.displayCurrentWeather(l);
-            const d = await n(i(), "imperial");
-            e.displayFiveDayWeather(d), (a.value = "");
+          const s = document.getElementById("user-input");
+          a.addEventListener("submit", async (a) => {
+            var l;
+            a.preventDefault(), (l = s.value), (i = l);
+            const d = await t(c(), "imperial");
+            e.displayCurrentWeather(d);
+            const u = await r(c(), "imperial");
+            e.displayFiveDayWeather(u);
+            const m = await n(c(), "imperial");
+            e.displayThreeHourWeather(m), (o.value = "");
           });
         },
-        readLocation: i,
+        readLocation: c,
       };
     })(),
-    a = (() => {
-      const o = document.getElementById("units-btn");
-      let i = "imperial";
+    o = (() => {
+      const i = document.getElementById("units-btn");
+      let c = "imperial";
       return {
         changeUnit: () => {
-          "imperial" === i
-            ? (i = "metric")
-            : "metric" === i && (i = "imperial");
+          "imperial" === c
+            ? (c = "metric")
+            : "metric" === c && (c = "imperial");
         },
-        getCurrentUnit: () => i,
+        getCurrentUnit: () => c,
         updateDisplayUnits: () => {
-          o.addEventListener("click", async () => {
-            a.changeUnit();
-            const o = a.getCurrentUnit();
-            e.setUnits(o);
-            const i = r.readLocation(),
-              c = await t(i, o);
-            e.displayCurrentWeather(c);
-            const s = await n(i, o);
-            e.displayFiveDayWeather(s);
+          i.addEventListener("click", async () => {
+            o.changeUnit();
+            const i = o.getCurrentUnit();
+            e.setUnits(i);
+            const c = a.readLocation(),
+              s = await t(c, i);
+            e.displayCurrentWeather(s);
+            const l = await r(c, i);
+            e.displayFiveDayWeather(l);
+            const d = await n(c, i);
+            e.displayThreeHourWeather(d);
           });
         },
       };
     })(),
-    o = a;
+    i = o;
   window.addEventListener("load", async () => {
     try {
-      const r = await t("San Francisco", "imperial");
-      e.displayCurrentWeather(r);
-      const a = await n("San Francisco", "imperial");
-      e.displayFiveDayWeather(a), e.setUnits("imperial");
+      const a = await t("San Francisco", "imperial");
+      e.displayCurrentWeather(a);
+      const o = await r("San Francisco", "imperial");
+      e.displayFiveDayWeather(o);
+      const i = await n("San Francisco", "imperial");
+      e.displayThreeHourWeather(i), e.setUnits("imperial");
     } catch (e) {
       alert(e);
     }
   }),
-    r.getData(),
-    o.updateDisplayUnits();
+    a.getData(),
+    i.updateDisplayUnits();
 })();
