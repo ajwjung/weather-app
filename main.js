@@ -220,7 +220,7 @@
       try {
         const r = "f6d50020f2b429ca9a34a9206321e0c7",
           n = await fetch(
-            ` http://api.openweathermap.org/geo/1.0/direct?q=${e}&limit=1&appid=${r}`,
+            ` https://api.openweathermap.org/geo/1.0/direct?q=${e}&limit=1&appid=${r}`,
             { mode: "cors" }
           ),
           a = await n.json(),
